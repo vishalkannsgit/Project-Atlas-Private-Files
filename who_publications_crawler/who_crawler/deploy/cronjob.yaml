@@ -1,0 +1,64 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: who-publications-crawler
+  namespace: atlas-data-acquisition
+  labels:
+    app: atlas-crawler
+    workstream: web-crawling
+    source: who_publications
+spec:
+  schedule: "0 3 * * *"          # once daily, 3am — adjust per source SLA
+  concurrencyPolicy: Forbid       # never run two crawls of the same source at once
+  successfulJobsHistoryLimit: 5
+  failedJobsHistoryLimit: 5
+  jobTemplate:
+    spec:
+      backoffLimit: 2
+      activeDeadlineSeconds: 3600
+      template:
+        metadata:
+          labels:
+            app: atlas-crawler
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: who-publications-crawler
+              image: registry.internal/atlas/web-crawler:latest
+              args: ["--source", "who_publications"]
+              ports:
+                - containerPort: 9090
+                  name: metrics
+              env:
+                - name: REDIS_URL
+                  valueFrom:
+                    secretKeyRef: { name: atlas-crawler-secrets, key: redis-url }
+                - name: S3_BUCKET
+                  value: "atlas-raw-documents"
+                - name: S3_ENDPOINT_URL
+                  value: "http://minio.atlas-storage.svc.cluster.local:9000"
+                - name: S3_ACCESS_KEY
+                  valueFrom:
+                    secretKeyRef: { name: atlas-crawler-secrets, key: s3-access-key }
+                - name: S3_SECRET_KEY
+                  valueFrom:
+                    secretKeyRef: { name: atlas-crawler-secrets, key: s3-secret-key }
+                - name: KAFKA_BROKERS
+                  value: "kafka.atlas-messaging.svc.cluster.local:9092"
+                - name: LOG_LEVEL
+                  value: "INFO"
+              resources:
+                requests: { cpu: "100m", memory: "256Mi" }
+                limits: { cpu: "500m", memory: "512Mi" }
+---
+apiVersion: v1
+kind: ServiceMonitor
+metadata:
+  name: who-publications-crawler
+  namespace: atlas-data-acquisition
+spec:
+  selector:
+    matchLabels: { app: atlas-crawler }
+  endpoints:
+    - port: metrics
+      interval: 30s

@@ -1,0 +1,16 @@
+{
+  "id": "11e05d788c64c5b993f036ad",
+  "source_id": "who_publications",
+  "business_unit": "health-intelligence",
+  "url": "https://www.who.int/publications/i/item/97892401127971",
+  "title": "User manual for the Quick and Immediate Risk Assessment (QIRA) algorithm for Member States",
+  "content": "User manual for the Quick and Immediate Risk Assessment (QIRA) algorithm for Member States\n8 September 2026\n|\nManual\nDownload\n(1.4 MB)\nOverview\nThis user manual provides guidance on the application of the World Health Organization’s Quick and Immediate Risk Assessment (QIRA) algorithm, a practical tool developed to support Member States in conducting rapid assessments of acute public health events within routine public health intelligence activities. Using an all-hazards approach, the manual explains how to apply the algorithm step by step to determine the immediate level of risk associated with verified signals or events and to identify appropriate initial response actions. It describes the algorithm’s structure, including its domains, risk classification, predefined actions, confidence assessment and documentation requirements, and clarifies its relationship with other WHO risk assessment tools and the International Health Regulations (2005). Intended for public health professionals responsible for national and subnational public health intelligence activities, the manual also addresses key considerations for adapting the algorithm to different contexts, outlines its methodological limitations and provides practical resources, including a results recording form, a worked example and comparisons with other WHO risk assessment guidance. The publication aims to strengthen timely, systematic and transparent risk assessment to support informed decision-making and effective emergency response.\nWHO Team\nWHO South-East Asia\nNumber of pages\n58\nReference numbers\nISBN:\n9789240112797\nCopyright",
+  "format": "html",
+  "published_date": null,
+  "crawled_at": "2026-09-13T10:36:38.942788Z",
+  "content_hash": "2149e0509a7f820a1250feaa24947331aef7d5b4ded3552b844eb145908d1a08",
+  "owner": "web-crawling-workstream",
+  "version": 1,
+  "access_rights": "internal",
+  "status": "crawled"
+}

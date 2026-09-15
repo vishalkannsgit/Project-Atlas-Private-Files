@@ -1,0 +1,11 @@
+httpx==0.27.0
+beautifulsoup4==4.12.3
+pydantic==2.7.1
+tenacity==8.2.3
+prometheus-client==0.20.0
+# production-only backends (installed but only used if configured via env)
+redis==5.0.4
+boto3==1.34.100
+confluent-kafka==2.4.0
+# testing
+pytest==8.2.0
